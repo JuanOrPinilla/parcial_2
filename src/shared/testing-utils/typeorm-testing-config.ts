@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* archivo src/shared/testing-utils/typeorm-testing-config.ts*/
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AerolineaEntity } from '../../aerolinea/aerolinea.entity';
-import { AeropuertoEntity } from '../../aeropuerto/aeropuerto.entity';
+import{ MedicoEntity} from '../../medico/medico.entity';
+import{ PacienteEntity} from '../../paciente/paciente.entity';
+import { DiagnosticoEntity } from 'src/diagnostico/diagnostico.entity';
 
 
 export const TypeOrmTestingConfig = () => [
@@ -10,9 +11,9 @@ export const TypeOrmTestingConfig = () => [
    type: 'sqlite',
    database: ':memory:',
    dropSchema: true,
-   entities: [AerolineaEntity,AeropuertoEntity],
+   entities: [MedicoEntity,PacienteEntity, DiagnosticoEntity],
    synchronize: true,
    keepConnectionAlive: true
  }),
- TypeOrmModule.forFeature([AerolineaEntity,AeropuertoEntity]),
+ TypeOrmModule.forFeature([MedicoEntity,PacienteEntity, DiagnosticoEntity]),
 ];

@@ -25,8 +25,7 @@ import { MedicoModule } from './medico/medico.module';
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
-    }
-  ), ],
+    }), DiagnosticoModule, PacienteModule, MedicoModule], 
   controllers: [AppController],
   providers: [AppService],
 })

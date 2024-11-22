@@ -45,7 +45,7 @@ export class PacienteService {
 
         if( paciente.nombre.length < 3){
             throw new BusinessLogicException(
-                "The pacient name is invalid",
+                "El nombre del paciente debe tener al menos 3 caracteres",
                 BusinessError.PRECONDITION_FAILED
             );
         }

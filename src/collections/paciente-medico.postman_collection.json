@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "bf1310aa-213e-481f-8907-eb42686b995a",
+		"name": "paciente-medico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25532687"
+	},
+	"item": [
+		{
+			"name": "Add a paciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"paciente_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"David Perez\",\r\n    \"genero\": \"Masculino\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pacientes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a medico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"medico_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Biden\",\r\n    \"especialidad\": \"Cardiología\",\r\n    \"telefono\": \"1234567688\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/medicos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"medicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a medico to a paciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/pacientes/{{paciente_id_2}}/medicos/{{medico_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pacientes",
+						"{{paciente_id_2}}",
+						"medicos",
+						"{{medico_id_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a non existing medico to a paciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The doctor with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/pacientes/{{paciente_id_2}}/medicos/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pacientes",
+						"{{paciente_id_2}}",
+						"medicos",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a medico to a non existing paciente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The patient with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/pacientes/00000000-0000-0000-0000-000000000000/medicos/{{medico_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pacientes",
+						"00000000-0000-0000-0000-000000000000",
+						"medicos",
+						"{{medico_id_2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

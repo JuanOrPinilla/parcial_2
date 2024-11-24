@@ -1,15 +1,16 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Param, UseInterceptors, Body, Post, Delete, HttpCode } from '@nestjs/common';
-import { PacienteService } from './paciente.service';
+
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseInterceptors } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors/business-errors.interceptor';
+import { PacienteService } from './paciente.service';
 import { PacienteDto } from './paciente.dto';
-import { plainToInstance } from 'class-transformer';
 import { PacienteEntity } from './paciente.entity';
+import { plainToInstance } from 'class-transformer';
 
 @Controller('pacientes')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class PacienteController {
-    
+
     constructor(private readonly pacienteService: PacienteService) {}
 
     @Get()
@@ -32,6 +33,5 @@ export class PacienteController {
     @HttpCode(204)
     async delete(@Param('pacienteId') pacienteId: string) {
         return await this.pacienteService.delete(pacienteId);
-    }
+  }
 }
-

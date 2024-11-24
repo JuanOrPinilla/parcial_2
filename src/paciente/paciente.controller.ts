@@ -6,7 +6,7 @@ import { PacienteDto } from './paciente.dto';
 import { plainToInstance } from 'class-transformer';
 import { PacienteEntity } from './paciente.entity';
 
-@Controller('paciente')
+@Controller('pacientes')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class PacienteController {
     

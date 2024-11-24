@@ -10,6 +10,7 @@ import { PacienteEntity } from './paciente/paciente.entity';
 import { DiagnosticoModule } from './diagnostico/diagnostico.module';
 import { PacienteModule } from './paciente/paciente.module';
 import { MedicoModule } from './medico/medico.module';
+import { PacienteMedicoModule } from './paciente-medico/paciente-medico.module';
 
 
 @Module({
@@ -25,7 +26,7 @@ import { MedicoModule } from './medico/medico.module';
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true
-    }), DiagnosticoModule, PacienteModule, MedicoModule], 
+    }), DiagnosticoModule, PacienteModule, MedicoModule, PacienteMedicoModule], 
   controllers: [AppController],
   providers: [AppService],
 })
